@@ -8,6 +8,8 @@ namespace Quiz
 {
     public static class Frontend
     {
+        private static List<string> acceptedKeys = ["1", "2", "3", "4"];
+
         public static void DisplayWelcomeScreen()
         {
             Console.ForegroundColor = ConsoleColor.White;
@@ -22,7 +24,56 @@ namespace Quiz
             Console.ReadLine();
         }
 
-        public static int DisplayQuestion(Question question)
+        public static int DisplayQuestionAndGetAnswer(Question question)
+        {
+            var userAnswer = DisplayQuestion(question);
+            while(!acceptedKeys.Contains(userAnswer))
+            {
+                userAnswer = DisplayQuestion(question);
+            }
+
+            return int.Parse(userAnswer);
+        }
+
+        public static void GameOver()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(" Niestety, to nie jest prawidłowa odpowiedź");
+            Console.WriteLine();
+            Console.WriteLine(" KONIEC GRY");
+        }
+
+        public static void AnswerCorrect(int kategoria)
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(" Brawo, to prawidłowa odpowiedź");
+            Console.WriteLine($" Zdobywasz {kategoria} pkt.");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine();
+            Console.Write(" Naciśnij ENTER, aby zobaczyć następne pytanie...");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.ReadLine();
+        }
+
+        public static void QuizSuccess()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(" Brawo, to prawidłowa odpowiedź");
+            Console.WriteLine();
+            Console.WriteLine(" Udało Ci się ukończyć cały quiz.");
+            Console.WriteLine();
+            Console.WriteLine(" GRATULACJE !!!");
+        }
+
+
+
+        private static string DisplayQuestion(Question question)
         {
             Console.Clear();
             Console.WriteLine();
@@ -38,7 +89,7 @@ namespace Quiz
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(" Naciśnij 1, 2, 3 lub 4, aby udzielić odpowiedzi ... ");
             Console.ForegroundColor = ConsoleColor.White;
-            return int.Parse(Console.ReadLine());
+            return Console.ReadLine();
         }
     }
 }

@@ -2,56 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Quiz
 {
     public class Backend
     {
+        Random random;
+
         public Backend()
         {
+            random = new Random();
             CreateAllQuestions();
-            CurrentGameCategory = 100;
+            Categories = AllQuestions.Select(x => x.Category).Distinct().OrderBy(a => a).ToList();
+            CurrentGameCategory = Categories[CurrentIndex];
         }
-        
-        
+
+        public int CurrentIndex { get; set; }
+        public List<int> Categories { get; set; }
         public List<Question> AllQuestions { get; set; }
         public int CurrentGameCategory { get; set; }
         public Question CurrentQuestion { get; set; }
 
         public void CreateAllQuestions()
         {
-            AllQuestions = new List<Question>();
-            var q1 = new Question();
-            q1.Id = 1;
-            q1.Category = 100;
-            q1.Content = "Jak miał na imię Einstein?";
-            q1.Answers = new List<Answer>();
-            var a1 = new Answer();
-            a1.Id = 1;
-            a1.Content = "Albert";
-            a1.IsCorrect = true;
-            q1.Answers.Add(a1);
-            var a2 = new Answer();
-            a2.Id = 2;
-            a2.Content = "Aaron";
-            q1.Answers.Add(a2);
-            var a3 = new Answer();
-            a3.Id = 3;
-            a3.Content = "Jarek";
-            q1.Answers.Add(a3);
-            var a4 = new Answer();
-            a4.Id = 4;
-            a4.Content = "Zenek";
-            q1.Answers.Add(a4);
-            AllQuestions.Add(q1);
-
+            var path = $"{Directory.GetCurrentDirectory()}\\questions.json";
+            var json = File.ReadAllText(path);
+            AllQuestions = JsonSerializer.Deserialize<List<Question>>(json)!;
         }
         
         public void GetQuestion()
         {
-            // udejamy, że losujemy
-            CurrentQuestion = AllQuestions[0];
+            var questionsFromCategory = AllQuestions.Where(q => q.Category == CurrentGameCategory).ToList();
+            var number = random.Next(0, questionsFromCategory.Count);
+            var selectedQuestion = questionsFromCategory[number];
+            selectedQuestion.Answers = selectedQuestion.Answers.OrderBy(a => random.Next()).ToList();
+            var id = 1;
+            selectedQuestion.Answers.ForEach(a => a.Id = id++);
+            CurrentQuestion = selectedQuestion;
         }
 
         public bool CheckAnswer(int playerNumber)
@@ -69,5 +58,16 @@ namespace Quiz
             return result;
         }
 
+        public bool CheckIfLastCategory()
+        {
+            var maximumCategoryIndex = Categories.Count - 1;
+            return CurrentIndex == maximumCategoryIndex;
+        }
+
+        public void IncreaseCategory()
+        {
+            CurrentIndex++;
+            CurrentGameCategory = Categories[CurrentIndex];
+        }
     }
 }

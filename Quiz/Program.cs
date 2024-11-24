@@ -4,32 +4,45 @@
 // powołanie obiektów BC
 var backened = new Backend();
 
-
 // stworzenie listy wszystkich pytań => w konstruktorze
 // ustawienie kategorii na najniższą  => w konstruktorze
 
 // wyświetlanie ekranu powitalnego
 Frontend.DisplayWelcomeScreen();
 
-// losowanie pytania z aktualnej kategorii
-backened.GetQuestion();
-
-// wyświetlanie pytania
-var playerChoice = Frontend.DisplayQuestion(backened.CurrentQuestion);
-
-// walidacja odpowiedzi gracza
-var isCorrect = backened.CheckAnswer(playerChoice);
-
-if (isCorrect)
+while(true)
 {
-    Console.WriteLine();
-    Console.WriteLine(" HURRA !!!!!");
+    // losowanie pytania z aktualnej kategorii
+    backened.GetQuestion();
+
+    // wyświetlanie pytania
+    var playerChoice = Frontend.DisplayQuestionAndGetAnswer(backened.CurrentQuestion);
+
+    // walidacja odpowiedzi gracza
+    var isCorrect = backened.CheckAnswer(playerChoice);
+
+    if (isCorrect)
+    {
+        if (backened.CheckIfLastCategory())
+        {
+            Frontend.QuizSuccess();
+            break;
+        }
+        else
+        {
+            Frontend.AnswerCorrect(backened.CurrentGameCategory);
+            backened.IncreaseCategory();
+        }
+    }
+    else
+    {
+        Frontend.GameOver();
+        break;
+    }
 }
-else
-{
-    Console.WriteLine();
-    Console.WriteLine(" GAME OVER !!!!");
-}
+
+
+
 
 Console.ReadLine();
 
