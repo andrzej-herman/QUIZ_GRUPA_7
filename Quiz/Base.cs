@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Quiz
 {
-    public class Answer : Base
+    public abstract class Base
     {
-        public bool IsCorrect { get; set; }
+        public int Id { get; set; }
+        public string Content { get; set; }
     }
 }
