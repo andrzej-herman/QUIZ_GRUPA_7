@@ -8,14 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="questions.json" />
+    <Content Include="Gakuseisean-Ivista-2-Alarm-Help-and-Support.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Gakuseisean-Ivista-2-Alarm-Help-and-Support.ico" />
-    <Content Include="questions.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\QuizLogic\QuizLogic.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz", "Quiz.csproj", "{0B4A9024-C1E4-4470-A58F-CFB449B95395}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizLogic", "..\QuizLogic\QuizLogic.csproj", "{7C11D7A0-41A1-482D-A0BC-6EF1045C8736}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0B4A9024-C1E4-4470-A58F-CFB449B95395}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B4A9024-C1E4-4470-A58F-CFB449B95395}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B4A9024-C1E4-4470-A58F-CFB449B95395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C11D7A0-41A1-482D-A0BC-6EF1045C8736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C11D7A0-41A1-482D-A0BC-6EF1045C8736}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C11D7A0-41A1-482D-A0BC-6EF1045C8736}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C11D7A0-41A1-482D-A0BC-6EF1045C8736}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

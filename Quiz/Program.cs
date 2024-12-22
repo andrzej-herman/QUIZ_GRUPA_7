@@ -1,4 +1,5 @@
 ﻿using Quiz;
+using QuizLogic;
 
 
 // powołanie obiektów BC

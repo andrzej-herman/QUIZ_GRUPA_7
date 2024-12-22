@@ -1,6 +1,7 @@
-﻿using System.Text.Json;
+﻿using Quiz;
+using System.Text.Json;
 
-namespace Quiz
+namespace QuizLogic
 {
     public class Backend
     {
